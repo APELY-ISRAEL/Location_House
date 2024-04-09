@@ -8,5 +8,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth_app/', include('auth_app.urls')),
     path('client_app/', include('client_app.urls')),
-     path('', views.home, name='home'),
+    path('', views.home, name='home'),
 ]
