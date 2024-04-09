@@ -8,7 +8,7 @@
 	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
 	<!-- title -->
-	<title>Fruitkha</title>
+	<title>House</title>
 
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" href="{% static 'assets/img/favicon.png' %}">
@@ -52,7 +52,7 @@
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">
-							<a href="index.html">
+							<a  href="{% url 'home' %}">
 								<img src="assets/img/logo.png" alt="">
 							</a>
 						</div>
@@ -66,12 +66,25 @@
 								<li><a href="{% url 'category' %}">Category</a></li>
 								<li><a href="{% url 'contact' %}">Contact</a></li>
 								
-								<li>
-									<div class="header-icons">
-										<a class="shopping-cart" href="{% url 'login' %}"><i class='bx bx-user' ></i></i></a>
-										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-									</div>
-								</li>
+										{% if request.user.is_authenticated %}
+			<!-- Afficher ces éléments uniquement si l'utilisateur est connecté -->
+			<li>
+				<div class="header-icons">
+					<a class="shopping-cart" href="{% url 'profile' %}"><i class='bx bx-user'></i>{{ user.username }}</a>
+					<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+					<a class="shopping-cart" href="{% url 'logout' %}"><i class='bx bx-log-out'></i> Déconnexion</a>
+				</div>
+			</li>
+		{% else %}
+			<!-- Afficher ces éléments uniquement si l'utilisateur n'est pas connecté -->
+			<li>
+				<div class="header-icons">
+					<a class="shopping-cart" href="{% url 'login' %}"><i class='bx bx-user'></i> Connexion</a>
+					<a class="shopping-cart" href="{% url 'logout' %}"><i class='bx bx-log-out'></i> Déconnexion</a>
+					<!-- Autres éléments de navigation pour les utilisateurs non connectés -->
+				</div>
+			</li>
+		{% endif %}
 							</ul>
 						</nav>
 						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
@@ -110,11 +123,11 @@
 				<div class="col-lg-9 offset-lg-2 text-center">
 					<div class="hero-text">
 						<div class="hero-text-tablecell">
-							<p class="subtitle">Fresh & Organic</p>
-							<h1>Delicious Seasonal Fruits</h1>
+							<p class="subtitle">house & apartment</p>
+							<h1>Beautiful houses.</h1>
 							<div class="hero-btns">
-								<a href="shop.html" class="boxed-btn">Fruit Collection</a>
-								<a href="contact.html" class="bordered-btn">Contact Us</a>
+								<a href="{% url 'category' %}" class="boxed-btn">House Collection</a>
+								<a href="{% url 'contact' %}" class="bordered-btn">Contact Us</a>
 							</div>
 						</div>
 					</div>
@@ -317,52 +330,51 @@
 	</div>
 	<!-- end logo carousel -->
 
-	<!-- footer -->
-	<div class="footer-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-6">
-					<div class="footer-box about-widget">
-						<h2 class="widget-title">About us</h2>
-						<p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
-					</div>
+<!-- footer -->
+<div class="footer-area">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3 col-md-6">
+				<div class="footer-box about-widget">
+					<h2 class="widget-title">About us</h2>
+					<p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
 				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="footer-box get-in-touch">
-						<h2 class="widget-title">Get in Touch</h2>
-						<ul>
-							<li>34/8, East Hukupara, Gifirtok, Sadan.</li>
-							<li>support@fruitkha.com</li>
-							<li>+00 111 222 3333</li>
-						</ul>
-					</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="footer-box get-in-touch">
+					<h2 class="widget-title">Get in Touch</h2>
+					<ul>
+						<li>34/8, East Hukupara, Gifirtok, Sadan.</li>
+						<li>komi@gmail.com</li>
+						<li>+2228 90 98 93 13</li>
+					</ul>
 				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="footer-box pages">
-						<h2 class="widget-title">Pages</h2>
-						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li><a href="about.html">About</a></li>
-							<li><a href="services.html">Shop</a></li>
-							<li><a href="news.html">News</a></li>
-							<li><a href="contact.html">Contact</a></li>
-						</ul>
-					</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="footer-box pages">
+					<h2 class="widget-title">Pages</h2>
+					<ul>
+						<li><a href="{% url 'home' %}">Home</a></li>
+						<li><a href="{% url 'house' %}">House</a></li>
+						<li><a hhref="{% url 'category' %}">Category</a></li>
+						<li><a href="{% url 'contact' %}">Contact</a></li>
+					</ul>
 				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="footer-box subscribe">
-						<h2 class="widget-title">Subscribe</h2>
-						<p>Subscribe to our mailing list to get the latest updates.</p>
-						<form action="index.html">
-							<input type="email" placeholder="Email">
-							<button type="submit"><i class="fas fa-paper-plane"></i></button>
-						</form>
-					</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="footer-box subscribe">
+					<h2 class="widget-title">Subscribe</h2>
+					<p>Subscribe to our mailing list to get the latest updates.</p>
+					<form action="index.html">
+						<input type="email" placeholder="Email">
+						<button type="submit"><i class="fas fa-paper-plane"></i></button>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- end footer -->
+</div>
+<!-- end footer -->
 	
 	<!-- copyright -->
 	<div class="copyright">

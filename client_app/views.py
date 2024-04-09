@@ -1,12 +1,11 @@
 from django.shortcuts import render
 from .models import Client
-from django.contrib.auth.decorators import login_required
+
 
 
 def home(request):
-    clients = Client.objects.all()
-    return render(request, 'home.html', {'clients': clients})
-
+        return render(request, 'home.html')
+   
 def house(request):
     return render(request, 'house.html')
 
