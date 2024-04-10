@@ -25,3 +25,19 @@ def hone(request):
 # Autres vues comme client_dashboard, admin_dashboard, etc.
 def ajout(request):
     return render(request, 'ajout.html')
+def categorie(request):
+    return render(request, 'categorie.html')
+def liste(request):
+    return render(request, 'liste.html')
+def listeCat(request):
+    return render(request, 'listeCat.html')
+def reservation(request):
+    return render(request, 'reservation.html')
+def modifier(request):
+    return render(request, 'modifier.html')
+def utilisateur(request):
+    return render(request, 'utilisateur.html')
+def visite(request):
+    return render(request, 'visite.html')
+def listeVente(request):
+    return render(request, 'listeVente.html')
