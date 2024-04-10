@@ -1,5 +1,5 @@
 from django.db import models
-
+from auth_app.models import User 
 # Create your models here.
 class Client(models.Model):
     name = models.CharField(max_length=100)

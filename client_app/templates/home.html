@@ -66,12 +66,11 @@
 								<li><a href="{% url 'category' %}">Category</a></li>
 								<li><a href="{% url 'contact' %}">Contact</a></li>
 								
-										{% if request.user.is_authenticated %}
-			<!-- Afficher ces éléments uniquement si l'utilisateur est connecté -->
+								{% if user.is_authenticated %}
+			
 			<li>
 				<div class="header-icons">
-					<a class="shopping-cart" href="{% url 'profile' %}"><i class='bx bx-user'></i>{{ user.username }}</a>
-					<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+					<a class="shopping-cart" href="{% url 'profil' %}"><i class='bx bx-user'></i>Profil</a>
 					<a class="shopping-cart" href="{% url 'logout' %}"><i class='bx bx-log-out'></i> Déconnexion</a>
 				</div>
 			</li>
@@ -80,7 +79,7 @@
 			<li>
 				<div class="header-icons">
 					<a class="shopping-cart" href="{% url 'login' %}"><i class='bx bx-user'></i> Connexion</a>
-					<a class="shopping-cart" href="{% url 'logout' %}"><i class='bx bx-log-out'></i> Déconnexion</a>
+					
 					<!-- Autres éléments de navigation pour les utilisateurs non connectés -->
 				</div>
 			</li>

@@ -4,8 +4,10 @@ from client_app import views
 
 urlpatterns = [
      path('home/', views.home, name='home'),
+     path('login/', views.login, name='login'),
        path('house/', views.house, name='house'),
         path('contact/', views.contact, name='contact'),
          path('category/', views.category, name='category'),
+          path('profil/', views.profil, name='profil'),
    
 ]

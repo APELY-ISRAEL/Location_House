@@ -66,6 +66,7 @@
 								<li><a href="{% url 'category' %}">Category</a></li>
 								<li><a href="{% url 'contact' %}">Contact</a></li>
 								
+                                {% if request.user.is_authenticated %}
 								<li>
                                     <div class="header-icons">
                                         <a class="shopping-cart" href="{% url 'profile' %}"><i class='bx bx-user'></i>{{ user.username }}</a>

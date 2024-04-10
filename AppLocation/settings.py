@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'auth_app',
     'client_app',
+    'admin_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -125,7 +126,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'auth_app/static'),
-    os.path.join(BASE_DIR, 'client_app/static')
+    os.path.join(BASE_DIR, 'client_app/static'),
+    os.path.join(BASE_DIR, 'admin_app/static')
 ]
 
 
@@ -134,3 +136,5 @@ LOGOUT_REDIRECT_URL = "/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'auth_app.CustomUser'
+LOGIN_URL = 'index'
