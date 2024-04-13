@@ -70,7 +70,7 @@
 			
 			<li>
 				<div class="header-icons">
-					<a class="shopping-cart" href="{% url 'profil' %}"><i class='bx bx-user'></i>Profil</a>
+					<a class="shopping-cart" href="{% url 'profil' %}"><i class='bx bx-user'></i>{{ user.username }}</a>
 					<a class="shopping-cart" href="{% url 'logout' %}"><i class='bx bx-log-out'></i> Déconnexion</a>
 				</div>
 			</li>

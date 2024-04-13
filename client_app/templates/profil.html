@@ -15,6 +15,7 @@
 	<!-- google font -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	<!-- fontawesome -->
 	<link rel="stylesheet" href="{% static 'css/all.min.css' %}">
 	<!-- bootstrap -->
@@ -142,13 +143,13 @@
 						    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
 						      <div class="card-body">
 						        <div class="billing-address-form">
-						        	<form action="index.html">
-						        		<p><input type="text" placeholder="Userame"></p>
-						        		<p><input type="email" placeholder="Email"></p>
-						        	</form>
-                                    
-                                    <a href="{% url 'logout' %}" class="boxed-btn" style="margin-top:2rem">Deconnexion</a>
-						        </div>
+									<form action="index.html">
+										<p><input type="text" name="username" value="{{ user.username }}" readonly></p>
+										<p><input type="email" name="email" value="{{ user.email }}" readonly></p>
+									</form>
+									<a href="{% url 'logout' %}" class="boxed-btn" style="margin-top:2rem">Déconnexion</a>
+								</div>
+								
 						      </div>
 						    </div>
 						  </div>				 

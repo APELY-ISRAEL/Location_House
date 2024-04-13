@@ -52,7 +52,7 @@
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">
-							<a href="index.html">
+							<a  href="{% url 'home' %}">
 								<img src="assets/img/logo.png" alt="">
 							</a>
 						</div>
@@ -66,24 +66,24 @@
 								<li><a href="{% url 'category' %}">Category</a></li>
 								<li><a href="{% url 'contact' %}">Contact</a></li>
 								
-                                {% if request.user.is_authenticated %}
-								<li>
-                                    <div class="header-icons">
-                                        <a class="shopping-cart" href="{% url 'profile' %}"><i class='bx bx-user'></i>{{ user.username }}</a>
-                                        <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-                                        <a class="shopping-cart" href="{% url 'logout' %}"><i class='bx bx-log-out'></i> Déconnexion</a>
-                                    </div>
-                                </li>
-                            {% else %}
-                                <!-- Afficher ces éléments uniquement si l'utilisateur n'est pas connecté -->
-                                <li>
-                                    <div class="header-icons">
-                                        <a class="shopping-cart" href="{% url 'login' %}"><i class='bx bx-user'></i> Connexion</a>
-                                        <a class="shopping-cart" href="{% url 'logout' %}"><i class='bx bx-log-out'></i> Déconnexion</a>
-                                        <!-- Autres éléments de navigation pour les utilisateurs non connectés -->
-                                    </div>
-                                </li>
-                            {% endif %}
+								{% if user.is_authenticated %}
+			
+			<li>
+				<div class="header-icons">
+					<a class="shopping-cart" href="{% url 'profil' %}"><i class='bx bx-user'></i>{{ user.username }}</a>
+					<a class="shopping-cart" href="{% url 'logout' %}"><i class='bx bx-log-out'></i> Déconnexion</a>
+				</div>
+			</li>
+		{% else %}
+			<!-- Afficher ces éléments uniquement si l'utilisateur n'est pas connecté -->
+			<li>
+				<div class="header-icons">
+					<a class="shopping-cart" href="{% url 'login' %}"><i class='bx bx-user'></i> Connexion</a>
+					
+					<!-- Autres éléments de navigation pour les utilisateurs non connectés -->
+				</div>
+			</li>
+		{% endif %}
 							</ul>
 						</nav>
 						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>

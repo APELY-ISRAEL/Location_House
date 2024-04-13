@@ -1,68 +1,51 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from auth_app.models import User 
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect, render
+from auth_app.models import CustomUser
 
 def register(request):
     if request.method == 'POST':
+        # Récupérer les données du formulaire
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
-        role = request.POST.get('role')  # Ajoutez un champ pour sélectionner le rôle dans votre formulaire
-        
-        if User.objects.filter(username=username).exists():
-            messages.error(request, 'Ce nom d\'utilisateur est déjà utilisé.')
-            return redirect('register')
-        
-        if User.objects.filter(email=email).exists():
-            messages.error(request, 'Email déjà utilisé.')
-            return redirect('register')
-        
-        user = User.objects.create_user(username=username, email=email, role=role)  # Ajoutez le rôle ici
-        user.set_password(password)
-        user.save()
-        
-        messages.success(request, 'Compte créé avec succès. Connectez-vous maintenant.')
+        role = 'client'  # Par défaut, nouvel utilisateur est un client
+
+        # Créer un nouvel utilisateur
+        user = CustomUser.objects.create_user(username=username, email=email, password=password, role=role)
+
+        # Rediriger vers la page de connexion après l'inscription réussie
         return redirect('login')
-        
+
     return render(request, 'register.html')
 
 def login1(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        user = authenticate(request, email=email, password=password)
+        username = request.POST['username']
+        password = request.POST['password']
+
+        # Vérifier si l'utilisateur existe dans la base de données
+        user = authenticate(username=username, password=password)
+
         if user is not None:
-            login(request, user)
-            return redirect('home')  # Rediriger vers la page d'accueil après connexion
+            if user.is_active:  # Vérifier si le compte est actif
+                login(request, user)
+                # Rediriger l'utilisateur vers la page appropriée
+                if user.role == 'admin':
+                    return redirect('index')
+                elif user.role == 'client':
+                    return redirect('home')
+            else:
+                # Compte inactif, afficher un message d'erreur
+                messages.error(request, 'Votre compte est inactif.')
+                return redirect('login')  # Redirection vers la page de connexion
         else:
-            messages.error(request, 'Email ou mot de passe incorrect.')
+            # Informer l'utilisateur que les informations de connexion sont incorrectes
+            messages.error(request, 'Nom d\'utilisateur ou mot de passe incorrect.')
+            return redirect('login')  # Redirection vers la page de connexion
+
     return render(request, 'login.html')
 
-@login_required
-def profil(request):
-    return render(request, 'profil.html')
-
 def logout1(request):
-    logout(request)
-    return redirect('login')  # Rediriger vers la page de connexion après déconnexion
-
-def client_home(request):
-    return render(request, 'home.html')
-
-def admin_home(request):
-    return render(request, 'index.html')
-
-@login_required
-def home(request):
-    if request.user.is_authenticated:
-        if request.user.role == 'client':
-            return redirect('client_home')
-        elif request.user.role == 'admin':
-            return redirect('admin_home')
-    return redirect('login')
-
-def logout_view(request):
     logout(request)
     return redirect('login')

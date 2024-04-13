@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'AppLocation.wsgi.application'
 DATABASES = {
  'default': {
     'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'agence',
+    'NAME': 'agences',
     'USER': 'root', 
     'PASSWORD':'',
     'HOST': '127.0.0.1', 
