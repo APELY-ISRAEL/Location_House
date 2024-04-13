@@ -176,23 +176,23 @@
                   <h6 class="m-0 font-weight-bold text-primary">Enregistrement dune maison</h6>
                 </div>
                 <div class="card-body">
-                  <form method="post" enctype="multipart/form-data">
+                  <form method="post" enctype="multipart/form-data" action="{% url 'ajout' %}">
                     {% csrf_token %}
                     <div class="form-group">
                       <label for="titre">Titre</label>
-                      <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre">
+                      <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre" required>
                     </div>
                     <div class="form-group">
                       <label for="description">Description</label>
-                      <textarea class="form-control" id="description" name="description" rows="3" placeholder="Description"></textarea>
+                      <textarea class="form-control" id="description" name="description" rows="3" placeholder="Description" required></textarea>
                     </div>
                     <div class="form-group">
                       <label for="adresse">Adresse</label>
-                      <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Adresse">
+                      <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Adresse" required>
                     </div>
                     <div class="form-group">
                       <label for="categorie">Catégorie</label>
-                      <select class="form-control" id="categorie" name="categorie">
+                      <select class="form-control" id="categorie" name="categorie" required>
                           {% for categorie in categories %}
                           <option value="{{ categorie.id }}">{{ categorie.libelle }}</option>
                           {% endfor %}
@@ -200,15 +200,21 @@
                   </div>
                     <div class="form-group">
                       <label for="prix">Prix</label>
-                      <input type="text" class="form-control" id="prix" name="prix" placeholder="Prix">
+                      <input type="text" class="form-control" id="prix" name="prix" placeholder="Prix" required>
                     </div>
                     <div class="form-group">
                       <label for="statut">Statut</label>
-                      <input type="text" class="form-control" id="statut" name="statut" placeholder="Statut">
+                      <select class="form-control" id="statut" name="statut" required>
+                        <option value="Disponible">Disponible</option>
+                        <option value="Vendu">Vendu</option>
+                        <option value="En attente">En attente</option>
+                        <!-- Ajoutez d'autres options si nécessaire -->
+                      </select>
                     </div>
+                    
                     <div class="form-group">
                       <label for="photo">Photo</label>
-                      <input type="file" class="form-control-file" id="photo" name="photo">
+                      <input type="file" class="form-control-file" id="photo" name="photo" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Enregistrer</button>
                   </form>

@@ -175,31 +175,44 @@
             <div class="col-lg-12">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Les utilisateurs</h6>
                 </div>
                 <div class="table-responsive p-3">
                   <table class="table align-items-center table-flush" id="dataTable">
                     <thead class="thead-light">
                       <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                        
                       </tr>
                     </thead>
-                    <tfoot>
-                      <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                      </tr>
-                    </tfoot>
                     <tbody>
+                      {% for utilisateur in utilisateurs %}
+                      <tr>
+                        <td>{{ utilisateur.username }}</td>
+                        <td>{{ utilisateur.email }}</td>
+                        <td>
+                          <form method="post" action="">
+                            {% csrf_token %}
+                            <select name="role" class="form-control">
+                              <option value="Admin" {% if utilisateur.role == 'Admin' %}selected{% endif %}>Admin</option>
+                              <option value="Utilisateur" {% if utilisateur.role == 'Utilisateur' %}selected{% endif %}>Utilisateur</option>
+                              <!-- Ajoutez d'autres options selon vos besoins -->
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm">Enregistrer</button>
+                          </form>
+                        </td>
+                        <td>
+                          <a href="" class="btn btn-danger btn-sm">
+                              <i class='bx bx-trash'></i> Supprimer
+                          </a>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                    
 
                     </tbody>
                   </table>

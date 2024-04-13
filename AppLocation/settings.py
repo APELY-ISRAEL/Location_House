@@ -129,7 +129,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'client_app/static'),
     os.path.join(BASE_DIR, 'admin_app/static')
 ]
-
+MEDIA_ROOT = BASE_DIR / "admin_app/media"
+MEDIA_URL = "/media/admin_app/"
 
 LOGOUT_REDIRECT_URL = "/"
 # Default primary key field type

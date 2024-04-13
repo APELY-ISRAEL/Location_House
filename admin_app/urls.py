@@ -14,6 +14,4 @@ urlpatterns = [
      path('utilisateur/', views.utilisateur, name='utilisateur'),
       path('visite/', views.visite, name='visite'),
      
-     
-   
 ]
