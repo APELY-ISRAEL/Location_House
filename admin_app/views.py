@@ -55,15 +55,18 @@ def categorie(request):
         nouvelle_categorie.save()
 
         # Rediriger vers une page de confirmation ou une autre vue
-        return redirect('categorie', id=nouvelle_categorie.id)  # Rediriger vers la vue de détail de la catégorie par exemple
-     
+        return redirect('categorie')  # Rediriger vers la même page après l'enregistrement
     # Si la méthode de requête n'est pas POST, afficher le formulaire
-    return render(request, 'categorie.html')
+    return render(request, 'ajout.html')
 
 def liste(request):
     return render(request, 'liste.html')
+
 def listeCat(request):
-    return render(request, 'listeCat.html')
+    categories = Categorie.objects.all()
+    context = {'categories': categories}
+    return render(request, 'listeCat.html', context)
+
 def reservation(request):
     return render(request, 'reservation.html')
 def modifier(request):

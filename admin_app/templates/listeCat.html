@@ -170,43 +170,50 @@
           </div>
 
           <!-- Row -->
-          <div class="row">
-            <!-- Datatables -->
-            <div class="col-lg-12">
-              <div class="card mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
-                </div>
-                <div class="table-responsive p-3">
-                  <table class="table align-items-center table-flush" id="dataTable">
-                    <thead class="thead-light">
+<div class="row">
+  <!-- Datatables -->
+  <div class="col-lg-12">
+      <div class="card mb-4">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-primary">Liste des Categories</h6>
+          </div>
+          <div class="table-responsive p-3">
+              <table class="table align-items-center table-flush" id="dataTable">
+                  <thead class="thead-light">
                       <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                          <th>Libelle</th>
+                          <th>Action</th>
                       </tr>
-                    </thead>
-                    <tfoot>
+                  </thead>
+                  <tfoot>
                       <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                          <th>Libelle</th>
+                          <th>Action</th>
                       </tr>
-                    </tfoot>
-                    <tbody>
+                  </tfoot>
+                  <tbody>
+                      {% for categorie in categories %}
+                      <tr>
+                          <td>{{ categorie.libelle }}</td>
+                          <td>
+                              <!-- Bouton Modifier -->
+                              <a href="" class="btn btn-info btn-sm">
+                                  <i class='bx bx-edit-alt'></i> Modifier
+                              </a>
+                              <!-- Bouton Supprimer -->
+                              <a href="" class="btn btn-danger btn-sm">
+                                  <i class='bx bx-trash'></i> Supprimer
+                              </a>
+                          </td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
 
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <!-- DataTable with Hover -->
  
 
           <!-- Modal Logout -->

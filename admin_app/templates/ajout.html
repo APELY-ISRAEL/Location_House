@@ -193,12 +193,11 @@
                     <div class="form-group">
                       <label for="categorie">Catégorie</label>
                       <select class="form-control" id="categorie" name="categorie">
-                        <!-- Inclure ici les options de catégorie -->
-                        <option value="1">Catégorie 1</option>
-                        <option value="2">Catégorie 2</option>
-                        <!-- Ajoutez d'autres options si nécessaire -->
+                          {% for categorie in categories %}
+                          <option value="{{ categorie.id }}">{{ categorie.libelle }}</option>
+                          {% endfor %}
                       </select>
-                    </div>
+                  </div>
                     <div class="form-group">
                       <label for="prix">Prix</label>
                       <input type="text" class="form-control" id="prix" name="prix" placeholder="Prix">
