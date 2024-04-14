@@ -205,14 +205,15 @@
                         <td><img src="{{ maison.photo.url }}" alt="Photo" style="max-width: 100px;"></td>
                         <td>
                             <!-- Ajoutez ici des boutons ou des liens pour les actions -->
-                            <a href="" class="btn btn-info btn-sm">
+                            <a href="{% url 'modifier_maison' maison.id %}" class="btn btn-info btn-sm">
                                 <i class='bx bx-edit-alt'></i> Modifier
                             </a>
                           </td>
                           <td>
-                            <a href="" class="btn btn-danger btn-sm">
-                                <i class='bx bx-trash'></i> Supprimer
-                            </a>
+                            <form method="post" action="{% url 'delete_maison' maison.id %}" style="display: inline;">
+                              {% csrf_token %}
+                              <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette maison ?')">Supprimer</button>
+                          </form>
                           </td>
                         </td>
                     </tr>

@@ -9,11 +9,10 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>DataTables</title>
+  <title>Admin - Form</title>
   <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
   <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
   <link href="{% static 'css/ruang-admin.min.css' %}" rel="stylesheet">
-  <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -169,98 +168,69 @@
             </ol>
           </div>
 
-          <!-- Row -->
           <div class="row">
-            <!-- Datatables -->
-            <div class="col-lg-12">
+            <div class="col-lg-6">
+              <!-- Form Basic -->
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Les utilisateurs</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Modification de Categorie</h6>
                 </div>
-                <div class="table-responsive p-3">
-                  <table class="table align-items-center table-flush" id="dataTable">
-                    <thead class="thead-light">
-                      <tr>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Action</th>
-                        
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for utilisateur in utilisateurs %}
-                      <tr>
-                        <td>{{ utilisateur.username }}</td>
-                        <td>{{ utilisateur.email }}</td>
-                        <td>
-                          <form method="post" action="{% url 'modify_role' user_id=utilisateur.id %}">
-                            {% csrf_token %}
-                            <select name="role" class="form-control">
-                              <option value="Admin" {% if utilisateur.role == 'Admin' %}selected{% endif %}>Admin</option>
-                              <option value="Client" {% if utilisateur.role == 'Client' %}selected{% endif %}>Client</option>
-                              <!-- Ajoutez d'autres options selon vos besoins -->
-                            </select>
-                            <button type="submit" class="btn btn-primary btn-sm">Enregistrer</button>
-                          </form>
-                        </td>
-                        <td>
-                          <a href="{% url 'delete_user' user.id %}" class="btn btn-danger btn-sm">
-                              <i class='bx bx-trash'></i> Supprimer
-                          </a>
-                        </td>
-                      </tr>
-                      {% endfor %}
-                    </tbody>
+                <div class="card-body">
+                   
+                    <form method="post" action="{% url 'modifier_categorie' categorie.id %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="libelle">Libelle</label>
+                            <input type="text" class="form-control" id="libelle" name="libelle" value="{{ categorie.libelle }}" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                    </form>
                     
-
-                    </tbody>
-                  </table>
+                 
                 </div>
               </div>
-            </div>
-            <!-- DataTable with Hover -->
- 
-
-          <!-- Modal Logout -->
-          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                  <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <!---Container Fluid-->
-      </div>
-
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>copyright &copy; <script> document.write(new Date().getFullYear()); </script> - developed by
-              <b><a href="https://indrijunanda.gitlab.io/" target="_blank">israel</a></b>
-            </span>
-          </div>
-        </div>
-      </footer>
-      <!-- Footer -->
+         
     </div>
   </div>
+  <!-- Modal Logout -->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to logout?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+        <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<!---Container Fluid-->
+</div>
+
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+<div class="container my-auto">
+<div class="copyright text-center my-auto">
+  <span>copyright &copy; <script> document.write(new Date().getFullYear()); </script> - developed by
+    <b><a href="https://indrijunanda.gitlab.io/" target="_blank">israel</a></b>
+  </span>
+</div>
+</div>
+</footer>
+<!-- Footer -->
+</div>
+</div>
 
   <!-- Scroll to top -->
   <a class="scroll-to-top rounded" href="#page-top">
@@ -271,17 +241,6 @@
   <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
   <script src="{% static 'js/ruang-admin.min.js' %}"></script>
-  <!-- Page level plugins -->
-  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
-  <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
-
-  <!-- Page level custom scripts -->
-  <script>
-    $(document).ready(function () {
-      $('#dataTable').DataTable(); // ID From dataTable 
-      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-    });
-  </script>
 
 </body>
 

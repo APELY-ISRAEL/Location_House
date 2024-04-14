@@ -1,19 +1,13 @@
 from pyexpat.errors import messages
 from django.conf import settings
-from django.shortcuts import render
+from django.http import HttpResponseNotFound
+from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.models import User
-
- 
-
-# Create your views here.
-
-
-# Dans views.py de votre application (client_app, admin_app, etc.)
-
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
+from django.contrib.auth import get_user_model
 
 from auth_app.models import CustomUser
 
@@ -75,6 +69,21 @@ def categorie(request):
     
     return render(request, 'categorie.html')
 
+def edit_categorie(request, categorie_id):
+    categorie = get_object_or_404(Categorie, id=categorie_id)
+    return render(request, 'modifierCat.html', {'categorie': categorie})
+
+def modifier_categorie(request, categorie_id):
+    if request.method == 'POST':
+        libelle = request.POST['libelle']
+        categorie = get_object_or_404(Categorie, id=categorie_id)
+        categorie.libelle = libelle  # Mettre à jour le libellé de la catégorie
+        categorie.save()
+        return redirect('listeCat')  # Rediriger vers la liste des catégories après modification
+    else:
+        return redirect('modifierCat', categorie_id=categorie_id)  # Rediriger vers la page de modification
+
+
 def liste(request):
     # Récupérer toutes les maisons depuis la base de données
     maisons = Maison.objects.all()
@@ -86,15 +95,12 @@ def listeCat(request):
     context = {'categories': categories}
     return render(request, 'listeCat.html', context)
 
-def sup_categorie(request, categorie_id):
+def delete_categorie(request, categorie_id):
+    categorie = get_object_or_404(Categorie, id=categorie_id)
     if request.method == 'POST':
-        categorie = Categorie.objects.get(pk=categorie_id)
         categorie.delete()
-        messages.success(request, 'Catégorie supprimée avec succès.')
-        return redirect('listeCat')
-    else:
-        messages.error(request, 'Erreur lors de la suppression de la catégorie.')
-        return redirect('listeCat')
+        return redirect('listeCat')  # Rediriger vers une vue appropriée après la suppression
+    return render(request, 'listeCat.html', {'categorie': categorie})
     
 
 def reservation(request):
@@ -111,3 +117,48 @@ def visite(request):
     return render(request, 'visite.html')
 def listeVente(request):
     return render(request, 'listeVente.html')
+
+def delete_user(request, user_id):
+    CustomUser = get_user_model()
+    user = get_object_or_404(CustomUser, id=user_id)
+    user.delete()
+    # Rediriger vers la vue des utilisateurs après la suppression
+    return redirect('utilisateur')
+
+def modify_role(request, user_id):
+    user = get_object_or_404(CustomUser, id=user_id)
+    if request.method == 'POST':
+        new_role = request.POST.get('role')
+        user.role = new_role
+        user.save()
+        return redirect('utilisateur')
+    return render(request, 'utilisateur.html', {'utilisateur': user})
+
+def modifier_maison(request, maison_id):
+    maison = get_object_or_404(Maison, id=maison_id)
+    categories = Categorie.objects.all()  # Récupérer toutes les catégories
+    context = {'maison': maison, 'categories': categories}
+    return render(request, 'modifier.html', context)
+
+def edit_maison(request, maison_id):
+    maison = get_object_or_404(Maison, id=maison_id)
+    if request.method == 'POST':
+        # Modifier les attributs de la maison selon les données reçues dans la requête POST
+        maison.titre = request.POST.get('titre')
+        maison.description = request.POST.get('description')
+        maison.adresse = request.POST.get('adresse')
+        maison.categorie_id = request.POST.get('categorie')
+        maison.prix = request.POST.get('prix')
+        maison.statut = request.POST.get('statut')
+        # Enregistrer les modifications
+        maison.save()
+        return redirect('liste')  # Rediriger vers la liste des maisons après la modification
+    return render(request, 'modifier.html', {'maison': maison})
+
+def delete_maison(request, maison_id):
+    maison = get_object_or_404(Maison, id=maison_id)
+    if request.method == 'POST':
+        maison.delete()
+        return redirect('liste')  # Rediriger vers la liste des maisons après la suppression
+    return render(request, 'liste.html', {'maison': maison})
+   

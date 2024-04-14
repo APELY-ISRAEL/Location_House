@@ -29,12 +29,6 @@
                     <h1 class="h4 text-gray-900 mb-4">Login</h1>
                   </div>
                   <form class="user" method="post" action="{% url 'login' %}">
-                    {% if error_message %}
-              <div class="error-messages" style="background-color: red; border-radius: 1px;color: white;">
-                  <p class="error">{{ error_message }}</p>
-              </div>
-              {% endif %}
-
                       {% csrf_token %}
                       <div class="form-group">
                         <label>Username</label>

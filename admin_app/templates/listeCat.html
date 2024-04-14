@@ -183,11 +183,13 @@
                       <tr>
                           <th>Libelle</th>
                           <th>Action</th>
+                          <th>Action</th>
                       </tr>
                   </thead>
                   <tfoot>
                       <tr>
                           <th>Libelle</th>
+                          <th>Action</th>
                           <th>Action</th>
                       </tr>
                   </tfoot>
@@ -197,13 +199,18 @@
                           <td>{{ categorie.libelle }}</td>
                           <td>
                               <!-- Bouton Modifier -->
-                              <a href="" class="btn btn-info btn-sm">
+                              <a href="{% url 'edit_categorie' categorie.id %}" class="btn btn-info btn-sm">
                                   <i class='bx bx-edit-alt'></i> Modifier
                               </a>
+                            </td>
+                              <td>
                               <!-- Bouton Supprimer -->
-                              <a href="" class="btn btn-danger btn-sm">
-                                  <i class='bx bx-trash'></i> Supprimer
-                              </a>
+                              <form method="post" action="{% url 'delete_categorie' categorie.id %}">
+                                {% csrf_token %}
+                                <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?')" class="btn btn-danger btn-sm">
+                                    <i class='bx bx-trash'></i> Supprimer
+                                </button>
+                            </form>
                           </td>
                       </tr>
                       {% endfor %}
