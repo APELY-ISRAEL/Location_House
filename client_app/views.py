@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from admin_app.models import Maison
 from auth_app.models import User 
 from django.contrib.auth.decorators import login_required
 
@@ -25,3 +26,7 @@ def profil(request):
     # Maintenant vous pouvez passer ces informations au template
     return render(request, 'profil.html', {'username': username, 'email': email, 'role': role})
 
+def maisons(request):
+    maisons = Maison.objects.all()
+    context = {'maisons': maisons}
+    return render(request, 'house.html', context)
