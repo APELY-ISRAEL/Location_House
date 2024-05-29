@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-($l205mb*=g9jdxt3@h%t8d&j)5+d-ue!x111)h(9()bwaql7f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.65']
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 
@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'AppLocation.wsgi.application'
 DATABASES = {
  'default': {
     'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'agences',
+    'NAME': 'agence',
     'USER': 'root', 
     'PASSWORD':'israel@2004',
-    'HOST': '127.0.0.1', 
+    'HOST': 'localhost', 
     'PORT': '3306', 
     }
 }
